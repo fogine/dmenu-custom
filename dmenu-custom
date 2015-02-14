@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# this script can be found at https://github.com/losingkeys/dmenu-custom
+
+websitesList="$HOME/.dmenu-web"
+terminalProgramsList="$HOME/.dmenu-terminal"
+
+if [ -e "$websitesList" ]; then
+   # use dmenu to ask the user to choose a website/program
+   choice="$(
+    echo "$(
+      grep -v ^# "$websitesList"   | \
+      cut -d, -f2,3,4,5,6,7,8,9,10 | \
+      tr , "\n"                    | \
+      tr -d "[:blank:]"            | \
+      sort -r                      | \
+      uniq                         | \
+      tr -s "\n"                   | \
+      sort
+    )" \
+    "$(
+      # shellcheck disable=SC2012
+      ls /bin |
+      sort
+    )" | \
+    dmenu
+  )"
+else
+  # FIXME not sure how to do this with find
+  # (https://github.com/koalaman/shellcheck/wiki/Directive)
+  # shellcheck disable=SC2012
+  choice="$(ls /bin | dmenu)"
+fi
+
+echo "$choice"
+
+url="$(
+  grep -v "^#" "$websitesList"                  | \
+  grep "[^,]\\+,\\s*$choice" -- "$websitesList" | \
+  cut -d, -f1                                   | \
+  tr -d "[:blank:]"
+)"
+
+if [ -n "$url" ]; then
+  exec chromium --app="$url"
+fi
+
+if [ -e "$terminalProgramsList" ]; then
+  # chop the choice up so you can pass arguments via dmenu
+  # (e.g. mutt -R to open a mutt (mail program) in read-only mode)
+  firstWordOfChoice="$(echo "$choice" | cut -d" " -f1)"
+
+  terminalProgram="$(
+    grep -v "^#" "$terminalProgramsList" | \
+    tr -sc "[:alpha:]" "\n"              | \
+    grep "$firstWordOfChoice"            | \
+    tr -d "[:blank:]"
+  )"
+
+  if [ -n "$terminalProgram" ]; then
+    exec urxvt -e "$terminalProgram"
+  fi
+fi
+
+exec "$choice"
