@@ -61,8 +61,12 @@ if [ -e "$terminalProgramsList" ]; then
   )"
 
   if [ -n "$terminalProgram" ]; then
-    exec urxvt -e "$terminalProgram"
+    # allow word-splitting so arguments can be passed to programs
+    # shellcheck disable=SC2086
+    exec urxvt -e $choice
   fi
 fi
 
-exec "$choice"
+# allow word-splitting so arguments can be passed to programs
+# shellcheck disable=SC2086
+exec $choice
