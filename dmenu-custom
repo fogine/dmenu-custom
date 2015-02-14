@@ -32,12 +32,15 @@ else
   choice="$(ls /bin | dmenu)"
 fi
 
-echo "$choice"
+# blank input
+if [ -z "$(echo "$choice" | tr -d "[:blank:]")" ]; then
+  exit 0
+fi
 
 url="$(
-  grep -v "^#" "$websitesList"                  | \
-  grep "[^,]\\+,\\s*$choice" -- "$websitesList" | \
-  cut -d, -f1                                   | \
+  grep -v "^#" "$websitesList" | \
+  grep "\(,\s*\)\+$choice"     | \
+  cut -d, -f1                  | \
   tr -d "[:blank:]"
 )"
 

@@ -15,8 +15,8 @@
 # url,keyword,optional-keyword
 https://github.com/,gh,github
 #+END_SRC
-  Note: You can have multiple keywords per URL. If you don't specify any, the
-  whole URL will show up in dmenu (maybe you prefer that).
+  Note: You can have multiple keywords per URL, but you /must/ specify at least
+  one.
 ** Hooking it up to XMonad
   It's easy to run this from XMonad, here's how I do it:
 #+BEGIN_SRC haskell
