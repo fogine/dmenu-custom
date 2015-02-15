@@ -1,5 +1,5 @@
 * dmenu-custom
-  Custom script for running programs using [[http://tools.suckless.org/dmenu/][dmenu]].
+  Run programs and open websites with [[http://tools.suckless.org/dmenu/][dmenu]].
 ** How does it work?
    1. Show a list of programs (from =/bin=) with dmenu (like normal)
       - Add website names from =~/.dmenu-web= (if that file exists)
@@ -14,6 +14,7 @@
 # comments start with a # sign
 # url,keyword,optional-keyword
 https://github.com/,gh,github
+https://news.ycombinator.com/ , hackernews , hn
 #+END_SRC
   Note: You can have multiple keywords per URL, but you /must/ specify at least
   one.
