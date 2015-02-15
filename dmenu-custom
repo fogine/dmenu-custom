@@ -38,9 +38,9 @@ if [ -z "$(echo "$choice" | tr -d "[:blank:]")" ]; then
 fi
 
 url="$(
-  grep -v "^#" "$websitesList" | \
-  grep "\(,\s*\)\+$choice"     | \
-  cut -d, -f1                  | \
+  grep -v "^#" "$websitesList"           | \
+  grep --word-regexp "\(,\s*\)\+$choice" | \
+  cut -d, -f1                            | \
   tr -d "[:blank:]"
 )"
 
