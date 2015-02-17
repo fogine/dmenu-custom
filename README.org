@@ -11,13 +11,22 @@
       3. Otherwise, open it normally.
 ** The format of =~/.dmenu-web=
 #+BEGIN_SRC
-# comments start with a # sign
+# comments start with a # sign at the start of a line
 # url,keyword,optional-keyword
 https://github.com/,gh,github
 https://news.ycombinator.com/ , hackernews , hn
 #+END_SRC
   Note: You can have multiple keywords per URL, but you /must/ specify at least
   one.
+** The format of =~/.dmenu-terminal=
+   Separate full application names (the names of the binaries) with whitespace
+   characters.
+#+BEGIN_SRC
+# comments start with a # sign at the start of a line
+# there are three apps listed (spaces or newlines to separate them
+vim
+cmus tmux
+#+END_SRC
 ** Hooking it up to XMonad
   It's easy to run this from XMonad, here's how I do it:
 #+BEGIN_SRC haskell
