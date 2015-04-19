@@ -23,13 +23,13 @@ if [ -e "$websitesList" ]; then
       ls /bin |
       sort
     )" | \
-    dmenu
+    dmenu -i
   )"
 else
   # FIXME not sure how to do this with find
   # (https://github.com/koalaman/shellcheck/wiki/Directive)
   # shellcheck disable=SC2012
-  choice="$(ls /bin | dmenu)"
+  choice="$(ls /bin | dmenu -i)"
 fi
 
 # blank input
