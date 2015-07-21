@@ -4,8 +4,7 @@
    1. Show a list of programs (from =/bin=) with dmenu (like normal)
       - Add website names from =~/.dmenu-web= (if that file exists)
    2. After choosing a program:
-      1. If it's a website name, open Chromium without browser chrome
-         (tabs/buttons/etc)
+      1. If it's a website name, open Chromium, if additional search pattern argument is supplied, add it to an url as search pattern
       2. If it's a program listed in =~/.dmenu-terminal=, open it in a terminal
          with =urxvt -e $program=.
       3. Otherwise, open it normally.
@@ -14,7 +13,8 @@
 # comments start with a # sign at the start of a line
 # url,keyword,optional-keyword
 https://github.com/,gh,github
-https://news.ycombinator.com/ , hackernews , hn
+# Following google url contains "%s" which is replaced later for search pattern
+https://google.com/search?q=%s , google , g
 #+END_SRC
   Note: You can have multiple keywords per URL, but you /must/ specify at least
   one.
