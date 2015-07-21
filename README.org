@@ -6,7 +6,7 @@
    2. After choosing a program:
       1. If it's a website name, open Chromium, if additional search pattern argument is supplied, add it to an url as search pattern
       2. If it's a program listed in =~/.dmenu-terminal=, open it in a terminal
-         with =urxvt -e $program=.
+         with =xterm -e $program=.
       3. Otherwise, open it normally.
 ** The format of =~/.dmenu-web=
 #+BEGIN_SRC
